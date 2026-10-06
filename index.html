@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dollhouse Salon | Luxury Hair Salon</title>
+  <meta name="description" content="Dollhouse Salon — Lakewood's luxury hair salon by Sharletha. Silk presses, color, glam styling. Where every woman is treated like royalty." />
+  <meta name="author" content="Sharletha Barrett" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dollhouse Salon | Luxury Hair Salon" />
+  <meta property="og:description" content="Luxury hair salon in Lakewood, WA. Silk presses, custom color, glam styling by Sharletha." />
+  <meta property="og:image" content="https://images.pexels.com/photos/32201508/pexels-photo-32201508.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" />
+  <meta property="og:url" content="https://www.thedollhousewa.com" />
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Dollhouse Salon",
+    "image": "https://images.pexels.com/photos/32201508/pexels-photo-32201508.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+    "url": "https://www.thedollhousewa.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "10103 Bristol Ave SW",
+      "addressLocality": "Lakewood",
+      "addressRegion": "WA",
+      "postalCode": "98499",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-253-226-8917",
+    "priceRange": "$$$",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "10:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "10:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "10:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00" }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/",
+      "https://www.facebook.com/",
+      "https://www.tiktok.com/"
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-yellow: #FFD700;
+      --color-brightyellow: #FFEB3B;
+      --color-lightyellow: #FFF8E1;
+      --color-cream: #FFF9C4;
+      --color-deepcharcoal: #16161A;
+      --color-offblack: #0C0C0E;
+      --font-script: 'Great Vibes', 'Pinyon Script', cursive;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', 'Montserrat', sans-serif;
+    }
+  </style>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background-color: #0C0C0E; color: #f7f7f7; overflow-x: hidden; }
+    ::selection { background: rgba(255,215,0,0.3); color: #fff; }
+
+    /* Custom cursor sparkle trail */
+    @media (pointer: fine) {
+      .cursor-trail { pointer-events: none; position: fixed; z-index: 9999; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #FFEB3B, #FFD700); box-shadow: 0 0 8px 2px rgba(255,235,59,0.6), 0 0 14px 4px rgba(255,215,0,0.4); opacity: 0.9; mix-blend-mode: screen; transition: transform 60ms ease-out; }
+      .cursor-dot { pointer-events: none; position: fixed; z-index: 9999; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,0.8); mix-blend-mode: screen; }
+    }
+
+    /* Glass card */
+    .glass-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(18px) saturate(120%);
+      -webkit-backdrop-filter: blur(18px) saturate(120%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(255,235,59,0.35);
+      box-shadow: 0 20px 50px rgba(255,235,59,0.12), 0 0 30px rgba(255,215,0,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    /* Golden divider line animation */
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #FFEB3B 30%, #FFEB3B 70%, transparent); opacity: 0.5; }
+
+    /* Loading overlay */
+    .load-overlay { position: fixed; inset: 0; background: #0C0C0E; z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; transition: opacity 0.9s ease, visibility 0.9s ease; }
+    .load-overlay.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+
+    /* Sparkle keyframes */
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    .shimmer-text {
+      background: linear-gradient(90deg, #fff 0%, #FFEB3B 25%, #FFD700 50%, #FFEB3B 75%, #fff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Particle canvas */
+    #particleCanvas { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+
+    /* Letterbox bars */
+    .letterbox-top, .letterbox-bottom { position: absolute; left: 0; width: 100%; height: clamp(30px, 8vh, 80px); background: linear-gradient(to bottom, #0C0C0E 0%, transparent 100%), linear-gradient(to top, #0C0C0E 0%, transparent 100%); z-index: 20; pointer-events: none; }
+    .letterbox-top { top: 0; }
+    .letterbox-bottom { bottom: 0; background: linear-gradient(to top, #0C0C0E 0%, transparent 100%), linear-gradient(to bottom, #0C0C0E 0%, transparent 100%); }
+
+    /* Navbar glass on scroll */
+    .nav-glass { background: rgba(12,12,14,0.75); backdrop-filter: blur(16px) saturate(130%); -webkit-backdrop-filter: blur(16px) saturate(130%); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+    /* Form inputs */
+    .form-field { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 0.85rem 1rem; color: #fff; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .form-field:focus { border-color: #FFEB3B; box-shadow: 0 0 0 3px rgba(255,235,59,0.15); outline: none; }
+
+    /* Mobile fixed action buttons */
+    .floating-mobile { display: none; }
+    @media (max-width: 768px) {
+      .floating-mobile { display: flex; }
+    }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(12,12,14,0.92); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+    .lightbox.active { opacity: 1; pointer-events: auto; }
+    .lightbox img { max-width: 92vw; max-height: 85vh; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 30px 80px rgba(0,0,0,0.6); transform: scale(0.92); transition: transform 0.4s ease; }
+    .lightbox.active img { transform: scale(1); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .cursor-trail, .cursor-dot { display: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-offblack text-white antialiased">
+
+  <!-- Custom cursor (desktop) -->
+  <div id="cursorTrail" class="cursor-trail hidden md:block"></div>
+  <div id="cursorDot" class="cursor-dot hidden md:block"></div>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loader" class="load-overlay" aria-label="Loading" role="dialog" aria-modal="true">
+    <div class="text-center">
+      <svg class="mx-auto mb-6 w-16 h-16 text-brightyellow drop-shadow-[0_0_15px_rgba(255,235,59,0.6)]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 6 L38 22 L56 24 L42 32 L46 50 L32 42 L18 50 L22 32 L8 24 L26 22 Z" />
+        <circle cx="32" cy="28" r="4" fill="#FFEB3B" stroke="none" />
+        <path d="M20 12 L28 4" stroke="#FFD700" stroke-width="1.5" />
+        <path d="M44 12 L36 4" stroke="#FFD700" stroke-width="1.5" />
+      </svg>
+      <h2 class="font-script text-4xl shimmer-text tracking-wide">Dollhouse</h2>
+      <p class="text-cream/60 text-sm mt-3 tracking-[0.2em] uppercase">Loading your royal experience</p>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4 md:py-5" aria-label="Primary">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 group" aria-label="Dollhouse Salon home">
+        <!-- Inline SVG logo (crown + diamond) -->
+        <svg class="w-10 h-10 text-brightyellow drop-shadow-[0_0_10px_rgba(255,235,59,0.5)] group-hover:drop-shadow-[0_0_20px_rgba(255,235,59,0.8)] transition-all duration-300" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 6 L38 22 L56 24 L42 32 L46 50 L32 42 L18 50 L22 32 L8 24 L26 22 Z" />
+          <circle cx="32" cy="28" r="3.5" fill="#FFD700" stroke="none" />
+          <path d="M20 10 L28 2" stroke="#FFEB3B" stroke-width="1" />
+          <path d="M44 10 L36 2" stroke="#FFEB3B" stroke-width="1" />
+        </svg>
+        <div class="leading-none">
+          <span class="font-script text-2xl md:text-3xl text-white tracking-wide block">Dollhouse</span>
+          <span class="text-[10px] md:text-[11px] text-cream/50 uppercase tracking-[0.25em] font-body font-medium">Salon</span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 lg:gap-10 text-sm font-body text-cream/90">
+        <a href="#about" class="hover:text-brightyellow transition-colors duration-300 tracking-wide">About</a>
+        <a href="#services" class="hover:text-brightyellow transition-colors duration-300 tracking-wide">Services</a>
+        <a href="#gallery" class="hover:text-brightyellow transition-colors duration-300 tracking-wide">Gallery</a>
+        <a href="#reviews" class="hover:text-brightyellow transition-colors duration-300 tracking-wide">Reviews</a>
+        <a href="#contact" class="hover:text-brightyellow transition-colors duration-300 tracking-wide">Contact</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow to-[#F0C000] text-white text-sm font-semibold shadow-[0_0_20px_rgba(255,215,0,0.25)] hover:shadow-[0_0_30px_rgba(255,215,0,0.45)] transition-all duration-300 hover:-translate-y-0.5">Book Now</a>
+      </div>
+
+      <button id="mobileToggle" class="md:hidden text-white text-2xl" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden fixed inset-0 top-[72px] bg-offblack/95 backdrop-blur-xl z-40 transition-transform duration-500 translate-x-full flex flex-col items-center justify-center gap-8" aria-hidden="true">
+      <a href="#about" class="text-xl font-display text-white hover:text-brightyellow transition-colors mobile-nav-link">About</a>
+      <a href="#services" class="text-xl font-display text-white hover:text-brightyellow transition-colors mobile-nav-link">Services</a>
+      <a href="#gallery" class="text-xl font-display text-white hover:text-brightyellow transition-colors mobile-nav-link">Gallery</a>
+      <a href="#reviews" class="text-xl font-display text-white hover:text-brightyellow transition-colors mobile-nav-link">Reviews</a>
+      <a href="#contact" class="text-xl font-display text-white hover:text-brightyellow transition-colors mobile-nav-link">Contact</a>
+      <a href="#contact" class="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-yellow to-[#F0C000] text-white font-semibold shadow-[0_0_20px_rgba(255,215,0,0.25)] mobile-nav-link">Book Now</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="relative w-full h-screen overflow-hidden flex items-center justify-center" aria-label="Hero">
+      <!-- Background image -->
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.pexels.com/photos/32201508/pexels-photo-32201508.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" alt="Luxury salon atmosphere" class="w-full h-full object-cover opacity-40 scale-[1.05]" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-r from-offblack/80 via-offblack/50 to-offblack/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-offblack via-transparent to-offblack/60"></div>
+      </div>
+
+      <!-- Canvas particles -->
+      <canvas id="particleCanvas"></canvas>
+
+      <!-- Light leaks -->
+      <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-yellow/10 blur-[120px] pointer-events-none z-[2]"></div>
+      <div class="absolute bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-brightyellow/8 blur-[100px] pointer-events-none z-[2]"></div>
+
+      <!-- Letterbox -->
+      <div class="letterbox-top"></div>
+      <div class="letterbox-bottom"></div>
+
+      <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <div id="heroLogo" class="mb-6 opacity-0 translate-y-6">
+          <svg class="mx-auto w-20 h-20 text-brightyellow drop-shadow-[0_0_30px_rgba(255,235,59,0.5)]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M32 6 L38 22 L56 24 L42 32 L46 50 L32 42 L18 50 L22 32 L8 24 L26 22 Z" />
+            <circle cx="32" cy="28" r="4" fill="#FFD700" stroke="none" />
+            <path d="M20 8 L28 0" stroke="#FFEB3B" stroke-width="1" />
+            <path d="M44 8 L36 0" stroke="#FFEB3B" stroke-width="1" />
+          </svg>
+        </div>
+
+        <h1 id="heroTitle" class="font-script text-6xl md:text-8xl lg:text-9xl text-white leading-[0.85] tracking-[0.02em] drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] mb-4 opacity-0">
+          <span class="block shimmer-text">Dollhouse</span>
+          <span class="block text-2xl md:text-4xl lg:text-5xl font-display tracking-[0.15em] text-cream/70 mt-3 font-normal">Salon</span>
+        </h1>
+
+        <p id="heroTag" class="text-lg md:text-2xl lg:text-3xl text-lightyellow/90 font-display italic mb-3 opacity-0 translate-y-4">
+          Hair • Style • Glam
+        </p>
+        <p id="heroSubtitle" class="text-base md:text-xl text-cream/80 mb-10 max-w-2xl mx-auto font-body font-light leading-relaxed opacity-0 translate-y-4">
+          Where Every Woman Is Treated Like Royalty. <br class="hidden md:block" />Step into the Dollhouse — crowned with confidence.
+        </p>
+
+        <div id="heroButtons" class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 translate-y-6">
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-yellow to-[#F0C000] text-white font-semibold shadow-[0_0_30px_rgba(255,215,0,0.35)] hover:shadow-[0_0_50px_rgba(255,215,0,0.55)] transition-all duration-300 hover:-translate-y-1 text-base md:text-lg">
+            Book Your Appointment
+            <i class="fa-solid fa-crown text-brightyellow text-sm"></i>
+          </a>
+          <a href="tel:+12532268917" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-medium hover:bg-white/5 hover:border-brightyellow/40 transition-all duration-300 text-base md:text-lg backdrop-blur-sm">
+            <i class="fa-solid fa-phone text-brightyellow"></i>
+            Call 253-226-8917
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="relative overflow-hidden py-28 md:py-36" aria-label="About Sharletha">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <!-- Image -->
+          <div class="relative group" id="aboutImage">
+            <div class="relative overflow-hidden rounded-[2rem] shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+              <img src="https://images.pexels.com/photos/13357094/pexels-photo-13357094.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=700" alt="Sharletha Barrett — Owner and Licensed Stylist at Dollhouse Salon" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-offblack/60 via-transparent to-offblack/20"></div>
+            </div>
+            <div class="absolute -top-6 -right-4 md:-right-8 w-24 h-24 md:w-36 md:h-36 rounded-full border border-brightyellow/20 bg-offblack/60 backdrop-blur-md flex items-center justify-center shadow-[0_0_40px_rgba(255,235,59,0.15)]">
+              <span class="font-script text-3xl md:text-5xl text-brightyellow shimmer-text">Sharletha</span>
+            </div>
+            <div class="absolute -bottom-4 -left-4 md:-left-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-yellow/10 blur-3xl -z-10"></div>
+          </div>
+
+          <!-- Text -->
+          <div id="aboutText" class="lg:pl-6">
+            <div class="gold-line w-16 mb-6"></div>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+              The Heart Behind <span class="text-brightyellow shimmer-text">Dollhouse</span>
+            </h2>
+            <h3 class="font-script text-2xl md:text-3xl text-yellow mb-6">Meet Sharletha Barrett</h3>
+            <div class="space-y-4 text-cream/80 font-body leading-relaxed text-base md:text-lg">
+              <p>
+                Sharletha isn't just a stylist — she's the vision behind <strong class="text-white">The Dollhouse Salon</strong>, a space born from the belief that hair is a crown. After years of mastering silk presses and custom colors, she opened her doors in Lakewood to create something beyond ordinary.
+              </p>
+              <p>
+                She specializes in silk presses that bring hair back to life and custom colors that turn heads — always with healthy hair at the forefront. Her philosophy? <em class="text-lightyellow">Your hair, your crown.</em> Every appointment is a royal experience: warm, personalized, and designed to make you feel powerful the moment you walk out.
+              </p>
+              <p class="text-sm text-cream/50 italic">
+                "I opened Dollhouse to build a salon where women don't just leave looking beautiful — they leave feeling unstoppable."
+              </p>
+            </div>
+            <a href="#contact" class="inline-block mt-8 px-8 py-3 rounded-full border border-brightyellow/30 text-brightyellow hover:bg-brightyellow/10 transition-all duration-300 font-medium tracking-wide">
+              Book with Sharletha <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="relative overflow-hidden py-28 md:py-36" aria-label="Services">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div class="gold-line w-20 mx-auto mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">Our <span class="text-brightyellow shimmer-text">Services</span></h2>
+          <p class="text-cream/60 font-body text-base md:text-lg">Luxury treatments designed to make you feel like royalty.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <!-- Service cards -->
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center mb-5 border border-yellow/20 shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-sparkles text-yellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Silk Press</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Smooth, sleek, and stunning. A silk press that restores life to your hair with a mirror finish.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $85</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center mb-5 border border-yellow/20 shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-wind text-yellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Blowouts</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Volume, bounce, and body. Our blowouts leave hair full of movement and healthy shine.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $55</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center mb-5 border border-brightyellow/20 shadow-[0_0_20px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-palette text-brightyellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Color & Highlights</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Custom color formulations designed to complement your skin tone, personality, and vision.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $120</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center mb-5 border border-brightyellow/20 shadow-[0_0_20px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-scissors text-brightyellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Cuts & Layers</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Precision cuts and layered styles that frame the face and enhance your natural beauty.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $65</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center mb-5 border border-yellow/20 shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-braid text-yellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Braids & Styling</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">From classic box braids to intricate styles, designed for beauty, protection, and comfort.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $95</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center mb-5 border border-yellow/20 shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-crown text-yellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Wigs & Installs</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Custom wig installations, lace closures, and unit styling for seamless, natural looks.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $150</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center mb-5 border border-brightyellow/20 shadow-[0_0_20px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-droplet text-brightyellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Treatments</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Deep conditioning, protein treatments, and scalp therapies to restore hair health from root to tip.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $45</span>
+          </article>
+
+          <article class="glass-card p-7 md:p-8 flex flex-col" data-service>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center mb-5 border border-brightyellow/20 shadow-[0_0_20px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-gem text-brightyellow text-xl"></i>
+            </div>
+            <h3 class="font-display text-xl md:text-2xl text-white mb-2">Special Occasion</h3>
+            <p class="text-cream/60 text-sm mb-4 flex-grow">Bridal styling, event glam, and red-carpet looks. Your moment deserves perfection.</p>
+            <span class="text-brightyellow font-display text-lg font-semibold">Starting at $180</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="relative overflow-hidden py-28 md:py-36" aria-label="Gallery">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div class="gold-line w-20 mx-auto mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">The <span class="text-brightyellow shimmer-text">Gallery</span></h2>
+          <p class="text-cream/60 font-body text-base md:text-lg">A glimpse into the Dollhouse experience.</p>
+        </div>
+
+        <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          <a href="#" onclick="openLightbox(this); return false;" class="block overflow-hidden rounded-[1.25rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] group" aria-label="Gallery image">
+            <img src="https://images.pexels.com/photos/11164697/pexels-photo-11164697.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600" alt="Bold glam hair styling" class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          </a>
+          <a href="#" onclick="openLightbox(this); return false;" class="block overflow-hidden rounded-[1.25rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] group" aria-label="Gallery image">
+            <img src="https://images.pexels.com/photos/8342914/pexels-photo-8342914.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600" alt="Elegant hair portrait" class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          </a>
+          <a href="#" onclick="openLightbox(this); return false;" class="block overflow-hidden rounded-[1.25rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] group" aria-label="Gallery image">
+            <img src="https://images.pexels.com/photos/8065441/pexels-photo-8065441.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600" alt="Hair styling session" class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          </a>
+          <a href="#" onclick="openLightbox(this); return false;" class="block overflow-hidden rounded-[1.25rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] group" aria-label="Gallery image">
+            <img src="https://images.pexels.com/photos/32201508/pexels-photo-32201508.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600" alt="Luxury salon atmosphere" class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          </a>
+          <a href="#" onclick="openLightbox(this); return false;" class="block overflow-hidden rounded-[1.25rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] group" aria-label="Gallery image">
+            <img src="https://images.pexels.com/photos/13357094/pexels-photo-13357094.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600" alt="Artistic salon portrait" class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY DOLLHOUSE -->
+    <section id="features" class="relative overflow-hidden py-28 md:py-36" aria-label="Why Choose Dollhouse">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div class="gold-line w-20 mx-auto mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">Why <span class="text-brightyellow shimmer-text">Dollhouse</span></h2>
+          <p class="text-cream/60 font-body text-base md:text-lg">More than a salon. A royal experience.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div class="glass-card p-8 text-center" data-feature>
+            <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center border border-brightyellow/20 shadow-[0_0_30px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-crown text-brightyellow text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl text-white mb-3">Luxury Experience</h3>
+            <p class="text-cream/60 text-sm leading-relaxed">Every visit is curated — from the atmosphere to the finish. You are the VIP.</p>
+          </div>
+
+          <div class="glass-card p-8 text-center" data-feature>
+            <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center border border-yellow/20 shadow-[0_0_30px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-leaf text-yellow text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl text-white mb-3">Quality Products</h3>
+            <p class="text-cream/60 text-sm leading-relaxed">Premium, salon-grade formulas that protect hair health while delivering stunning results.</p>
+          </div>
+
+          <div class="glass-card p-8 text-center" data-feature>
+            <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center border border-brightyellow/20 shadow-[0_0_30px_rgba(255,235,59,0.15)]">
+              <i class="fa-solid fa-hand-sparkles text-brightyellow text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl text-white mb-3">Personalized Styling</h3>
+            <p class="text-cream/60 text-sm leading-relaxed">No cookie-cutter cuts. Every service is tailored to your hair texture, face shape, and lifestyle.</p>
+          </div>
+
+          <div class="glass-card p-8 text-center" data-feature>
+            <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center border border-yellow/20 shadow-[0_0_30px_rgba(255,215,0,0.15)]">
+              <i class="fa-solid fa-spa text-yellow text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl text-white mb-3">Relaxing Atmosphere</h3>
+            <p class="text-cream/60 text-sm leading-relaxed">A calm, elegant space designed for comfort. Leave the stress at the door.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="relative overflow-hidden py-28 md:py-36" aria-label="Testimonials">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div class="gold-line w-20 mx-auto mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">Client <span class="text-brightyellow shimmer-text">Love</span></h2>
+          <p class="text-cream/60 font-body text-base md:text-lg">Real words from real queens.</p>
+        </div>
+
+        <div id="testimonialTrack" class="overflow-hidden relative">
+          <div id="testimonialSlider" class="flex gap-6 md:gap-8 w-max">
+            <!-- Cards -->
+            <div class="glass-card p-7 md:p-10 min-w-[340px] md:min-w-[420px] max-w-[92vw]">
+              <div class="flex items-center gap-1 mb-4 text-brightyellow text-sm">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-cream/80 font-body leading-relaxed mb-6 italic">"Sharletha gave me the best silk press I've ever had. My hair felt healthy, shiny, and the finish was flawless. The salon atmosphere made me feel like royalty."</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.pexels.com/photos/11164697/pexels-photo-11164697.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=100&w=100" alt="Client portrait" class="w-10 h-10 rounded-full object-cover ring-2 ring-brightyellow/30" loading="lazy" />
+                <div>
+                  <p class="text-white font-display text-base">Monique T.</p>
+                  <p class="text-cream/40 text-xs">Silk Press</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-7 md:p-10 min-w-[340px] md:min-w-[420px] max-w-[92vw]">
+              <div class="flex items-center gap-1 mb-4 text-brightyellow text-sm">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-cream/80 font-body leading-relaxed mb-6 italic">"I came for a color and left feeling like a new person. Sharletha really understands hair health and beauty. The custom highlights are exactly what I wanted."</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.pexels.com/photos/8342914/pexels-photo-8342914.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=100&w=100" alt="Client portrait" class="w-10 h-10 rounded-full object-cover ring-2 ring-brightyellow/30" loading="lazy" />
+                <div>
+                  <p class="text-white font-display text-base">Aisha R.</p>
+                  <p class="text-cream/40 text-xs">Color & Highlights</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-7 md:p-10 min-w-[340px] md:min-w-[420px] max-w-[92vw]">
+              <div class="flex items-center gap-1 mb-4 text-brightyellow text-sm">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-cream/80 font-body leading-relaxed mb-6 italic">"I've been searching for a salon that treats me like family. Dollhouse delivered beyond anything I imagined. The environment is calm, elegant, and so welcoming."</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.pexels.com/photos/32201508/pexels-photo-32201508.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=100&w=100" alt="Client portrait" class="w-10 h-10 rounded-full object-cover ring-2 ring-brightyellow/30" loading="lazy" />
+                <div>
+                  <p class="text-white font-display text-base">Tiffany M.</p>
+                  <p class="text-cream/40 text-xs">Blowout</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING & CONTACT -->
+    <section id="contact" class="relative overflow-hidden py-28 md:py-36" aria-label="Booking and Contact">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="grid lg:grid-cols-2 gap-14 lg:gap-20">
+          <!-- Form -->
+          <div class="glass-card p-8 md:p-10">
+            <h2 class="font-display text-3xl md:text-4xl text-white mb-2">Book Your <span class="text-brightyellow shimmer-text">Appointment</span></h2>
+            <p class="text-cream/50 text-sm mb-8">Select a service and we'll be in touch within 24 hours.</p>
+
+            <form id="bookingForm" class="space-y-5" onsubmit="handleBooking(event)" aria-label="Booking form" novalidate>
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="bName" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Name</label>
+                  <input type="text" id="bName" name="name" placeholder="Your name" required class="form-field w-full" />
+                </div>
+                <div>
+                  <label for="bPhone" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Phone</label>
+                  <input type="tel" id="bPhone" name="phone" placeholder="(253) 226-8917" required class="form-field w-full" />
+                </div>
+              </div>
+
+              <div>
+                <label for="bService" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Service</label>
+                <select id="bService" name="service" required class="form-field w-full bg-offblack/60">
+                  <option value="">Select a service</option>
+                  <option>Silk Press</option>
+                  <option>Blowout</option>
+                  <option>Color & Highlights</option>
+                  <option>Cut & Layers</option>
+                  <option>Braids & Styling</option>
+                  <option>Wigs & Installs</option>
+                  <option>Treatments</option>
+                  <option>Special Occasion</option>
+                  <option>Other / Not sure</option>
+                </select>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="bDate" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Preferred Date</label>
+                  <input type="date" id="bDate" name="date" class="form-field w-full bg-offblack/60" />
+                </div>
+                <div>
+                  <label for="bTime" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Preferred Time</label>
+                  <input type="time" id="bTime" name="time" class="form-field w-full bg-offblack/60" />
+                </div>
+              </div>
+
+              <div>
+                <label for="bMessage" class="block text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Message</label>
+                <textarea id="bMessage" name="message" rows="3" placeholder="Tell us about your hair goals..." class="form-field w-full resize-none"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-yellow to-[#F0C000] text-white font-semibold shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                Send Booking Request <i class="fa-solid fa-paper-plane text-sm"></i>
+              </button>
+            </form>
+
+            <p class="text-xs text-cream/30 mt-4">NOTE: This form submits via a mailto link for demonstration. Replace the <code>action</code> with your backend endpoint in production.</p>
+          </div>
+
+          <!-- Contact info -->
+          <div class="flex flex-col gap-8">
+            <div class="glass-card p-8 md:p-10">
+              <h3 class="font-display text-2xl text-white mb-6">Reach <span class="text-brightyellow shimmer-text">Us</span></h3>
+              <div class="space-y-5 text-sm text-cream/80 font-body">
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-full bg-yellow/10 flex items-center justify-center flex-shrink-0 border border-yellow/15">
+                    <i class="fa-solid fa-location-dot text-yellow"></i>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-white">Address</p>
+                    <p>10103 Bristol Ave SW, Lakewood, WA 98499</p>
+                    <a href="https://maps.google.com/?q=10103+Bristol+Ave+SW+Lakewood+WA" target="_blank" rel="noopener noreferrer" class="text-yellow hover:text-lightyellow transition-colors text-xs mt-1 inline-block">Open in Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-full bg-yellow/10 flex items-center justify-center flex-shrink-0 border border-yellow/15">
+                    <i class="fa-solid fa-phone text-yellow"></i>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-white">Phone</p>
+                    <a href="tel:+12532268917" class="hover:text-brightyellow transition-colors">(253) 226-8917</a>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-full bg-yellow/10 flex items-center justify-center flex-shrink-0 border border-yellow/15">
+                    <i class="fa-solid fa-clock text-yellow"></i>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-white">Hours</p>
+                    <p>Tue – Fri: 10:00 AM – 6:00 PM</p>
+                    <p>Sat: 10:00 AM – 4:00 PM</p>
+                    <p>Sun – Mon: By appointment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-8 md:p-10">
+              <h3 class="font-display text-2xl text-white mb-6">Follow <span class="text-brightyellow shimmer-text">Along</span></h3>
+              <p class="text-cream/60 text-sm mb-6">See the latest looks and behind-the-scenes magic.</p>
+              <div class="flex gap-3">
+                <a href="#" aria-label="Instagram" class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center border border-yellow/20 text-yellow hover:text-white hover:bg-yellow/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,215,0,0.1)] hover:shadow-[0_0_30px_rgba(255,215,0,0.25)] hover:-translate-y-1">
+                  <i class="fa-brands fa-instagram text-xl"></i>
+                </a>
+                <a href="#" aria-label="Facebook" class="w-12 h-12 rounded-full bg-gradient-to-br from-brightyellow/20 to-brightyellow/5 flex items-center justify-center border border-brightyellow/20 text-brightyellow hover:text-white hover:bg-brightyellow/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,235,59,0.1)] hover:shadow-[0_0_30px_rgba(255,235,59,0.25)] hover:-translate-y-1">
+                  <i class="fa-brands fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" aria-label="TikTok" class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow/20 to-yellow/5 flex items-center justify-center border border-yellow/20 text-yellow hover:text-white hover:bg-yellow/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,215,0,0.1)] hover:shadow-[0_0_30px_rgba(255,215,0,0.25)] hover:-translate-y-1">
+                  <i class="fa-brands fa-tiktok text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div class="mt-14 glass-card overflow-hidden rounded-[1.5rem] relative h-[320px] md:h-[420px]">
+          <iframe title="Salon location map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.392860561556!2d-122.5055433!3d47.1400614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5491500b4b2b57e9%3A0x8b1aae4a3c89a29e!2s10103%20Bristol%20Ave%20SW%2C%20Lakewood%2C%20WA%2098499!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0; filter: grayscale(0.8) contrast(1.1) brightness(0.85);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="absolute bottom-4 left-4 bg-offblack/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 shadow-lg">
+            <p class="text-xs text-cream/70">10103 Bristol Ave SW, Lakewood, WA</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative overflow-hidden bg-deepcharcoal border-t border-white/5 pt-16 pb-8" aria-label="Site footer">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="grid md:grid-cols-3 gap-10 md:gap-16 mb-12">
+        <div>
+          <a href="#" class="inline-flex items-center gap-2.5 mb-4 group" aria-label="Dollhouse Salon home">
+            <svg class="w-10 h-10 text-brightyellow drop-shadow-[0_0_10px_rgba(255,235,59,0.5)]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 L38 22 L56 24 L42 32 L46 50 L32 42 L18 50 L22 32 L8 24 L26 22 Z" />
+              <circle cx="32" cy="28" r="3.5" fill="#FFD700" stroke="none" />
+            </svg>
+            <div class="leading-none">
+              <span class="font-script text-2xl text-white tracking-wide block">Dollhouse</span>
+              <span class="text-[10px] text-cream/40 uppercase tracking-[0.25em] font-body font-medium">Salon</span>
+            </div>
+          </a>
+          <p class="text-cream/40 text-sm font-body leading-relaxed">Luxury hair salon in Lakewood, WA. Where beauty meets royal treatment.</p>
+        </div>
+        <div>
+          <h4 class="font-display text-white text-lg mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-cream/50 font-body">
+            <li><a href="#about" class="hover:text-brightyellow transition-colors">About Sharletha</a></li>
+            <li><a href="#services" class="hover:text-brightyellow transition-colors">Services</a></li>
+            <li><a href="#gallery" class="hover:text-brightyellow transition-colors">Gallery</a></li>
+            <li><a href="#reviews" class="hover:text-brightyellow transition-colors">Reviews</a></li>
+            <li><a href="#contact" class="hover:text-brightyellow transition-colors">Book Now</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-white text-lg mb-4">Hours</h4>
+          <ul class="space-y-2 text-sm text-cream/50 font-body">
+            <li class="flex justify-between"><span>Tuesday – Friday</span> <span class="text-cream/30">10:00 – 18:00</span></li>
+            <li class="flex justify-between"><span>Saturday</span> <span class="text-cream/30">10:00 – 16:00</span></li>
+            <li class="flex justify-between"><span>Sunday – Monday</span> <span class="text-cream/30">By Appt</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gold-line w-full mb-6"></div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-cream/30 font-body">
+        <p>© Dollhouse Salon. All rights reserved.</p>
+        <p>Designed with <i class="fa-solid fa-crown text-[10px] text-brightyellow mx-1"></i> by Sharletha</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE FLOATING BUTTONS -->
+  <div class="floating-mobile fixed bottom-6 right-6 z-40 flex flex-col gap-3" aria-label="Quick actions">
+    <a href="#contact" class="w-14 h-14 rounded-full bg-gradient-to-r from-yellow to-[#F0C000] text-white flex items-center justify-center shadow-[0_0_25px_rgba(255,215,0,0.45)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 hover:-translate-y-1" aria-label="Book Now">
+      <i class="fa-solid fa-calendar-check text-xl"></i>
+    </a>
+    <a href="tel:+12532268917" class="w-14 h-14 rounded-full bg-gradient-to-r from-brightyellow to-[#F0C000] text-white flex items-center justify-center shadow-[0_0_25px_rgba(255,235,59,0.45)] hover:shadow-[0_0_40px_rgba(255,235,59,0.6)] transition-all duration-300 hover:-translate-y-1" aria-label="Call Now">
+      <i class="fa-solid fa-phone text-lg"></i>
+    </a>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="backToTop" aria-label="Back to top" class="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-deepcharcoal/90 border border-white/10 text-brightyellow flex items-center justify-center shadow-[0_0_20px_rgba(255,235,59,0.2)] hover:bg-deepcharcoal hover:shadow-[0_0_30px_rgba(255,235,59,0.35)] transition-all duration-300 hover:-translate-y-1 opacity-0 translate-y-4 pointer-events-none md:block">
+    <i class="fa-solid fa-crown text-sm"></i>
+  </button>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()" aria-modal="true" role="dialog" aria-label="Image lightbox" tabindex="0">
+    <button onclick="closeLightbox(); event.stopPropagation();" class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl z-10" aria-label="Close lightbox">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="lightboxImage" src="" alt="Gallery image enlarged" />
+  </div>
+
+  <script>
+    // ===== LOADER =====
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1800);
+    });
+
+    // ===== PARTICLES (canvas) =====
+    (function initParticles() {
+      const canvas = document.getElementById('particleCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth;
+      let h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+
+      const count = Math.min(60, Math.floor(w * h / 18000));
+      const particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          r: Math.random() * 2 + 0.5,
+          alpha: Math.random() * 0.5 + 0.2,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+
+      let frame = 0;
+      function draw() {
+        frame++;
+        if (frame % 2 === 1) { requestAnimationFrame(draw); return; } // 30fps
+        ctx.clearRect(0, 0, w, h);
+        for (const p of particles) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+          const a = p.alpha * (0.7 + 0.3 * Math.sin(frame * 0.02 + p.phase));
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,235,59,${a})`;
+          ctx.fill();
+        }
+        // Draw faint connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(255,215,0,${0.08 * (1 - dist/120)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      window.addEventListener('resize', () => {
+        w = window.innerWidth; h = window.innerHeight;
+        canvas.width = w; canvas.height = h;
+      });
+    })();
+
+    // ===== GSAP ANIMATIONS =====
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero animations after load
+    setTimeout(() => {
+      const tl = gsap.timeline({ delay: 0.3 });
+      tl.to('#heroLogo', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        .to('#heroTitle', { opacity: 1, duration: 1.1, ease: 'power3.out' }, 0.2)
+        .to('#heroTag', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.6)
+        .to('#heroSubtitle', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.8)
+        .to('#heroButtons', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 1.0);
+    }, 1900);
+
+    // Navbar glass on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('nav-glass');
+        navbar.classList.remove('py-4', 'md:py-5');
+        navbar.classList.add('py-3');
+      } else {
+        navbar.classList.remove('nav-glass');
+        navbar.classList.remove('py-3');
+        navbar.classList.add('py-4', 'md:py-5');
+      }
+      // Back to top
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 600) {
+        btn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      } else {
+        btn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }
+    }, { passive: true });
+
+    // Mobile menu
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => {
+      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('translate-x-full');
+      mobileMenu.setAttribute('aria-hidden', String(expanded));
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('translate-x-full');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // Scroll reveals
+    document.querySelectorAll('[data-service]').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    document.querySelectorAll('[data-feature]').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 30, scale: 0.98 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    document.querySelectorAll('#aboutImage, #aboutText').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    // About image parallax
+    gsap.to('#aboutImage img', {
+      yPercent: -6,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5
+      }
+    });
+
+    // Gallery masonry images reveal
+    document.querySelectorAll('#gallery a').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 30, scale: 0.97 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power2.out', delay: i * 0.1,
+          scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    // ===== CUSTOM CURSOR =====
+    const trail = document.getElementById('cursorTrail');
+    const dot = document.getElementById('cursorDot');
+    let cx = 0, cy = 0, tx = 0, ty = 0;
+    if (trail && dot) {
+      document.addEventListener('mousemove', (e) => {
+        tx = e.clientX; ty = e.clientY;
+        dot.style.transform = `translate(${tx - 3}px, ${ty - 3}px)`;
+      }, { passive: true });
+      function animateTrail() {
+        cx += (tx - cx) * 0.15;
+        cy += (ty - cy) * 0.15;
+        trail.style.transform = `translate(${cx - 6}px, ${cy - 6}px)`;
+        requestAnimationFrame(animateTrail);
+      }
+      animateTrail();
+    }
+
+    // ===== LIGHTBOX =====
+    window.openLightbox = function(anchor) {
+      const img = anchor.querySelector('img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+    window.closeLightbox = function() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ===== BOOKING FORM =====
+    window.handleBooking = function(e) {
+      e.preventDefault();
+      const form = document.getElementById('bookingForm');
+      const data = new FormData(form);
+      const params = new URLSearchParams({
+        name: data.get('name'),
+        phone: data.get('phone'),
+        service: data.get('service'),
+        date: data.get('date'),
+        time: data.get('time'),
+        message: data.get('message')
+      });
+      // Create a mailto link as a simple backend substitute
+      const mailBody = `New booking request from Dollhouse Salon:\n\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred Date: ${data.get('date')}\nPreferred Time: ${data.get('time')}\nMessage: ${data.get('message')}`;
+      const mailtoLink = `mailto:hello@thedollhousewa.com?subject=Dollhouse%20Booking%20Request&body=${encodeURIComponent(mailBody)}`;
+      // Show success feedback
+      const btn = form.querySelector('button');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check-circle text-xl"></i> Request Sent';
+      btn.disabled = true;
+      btn.classList.remove('from-yellow', 'to-[#F0C000]');
+      btn.classList.add('from-emerald-500', 'to-emerald-600');
+      window.location.href = mailtoLink;
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+        btn.classList.add('from-yellow', 'to-[#F0C000]');
+        btn.classList.remove('from-emerald-500', 'to-emerald-600');
+        form.reset();
+      }, 3000);
+    };
+  </script>
+</body>
+</html>
